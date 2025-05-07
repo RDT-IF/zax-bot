@@ -2,4 +2,4 @@ rootProject.name = 'zax-bot'
 include 'infrastructure'
 include 'aws-lambda-bot'
 include 'zax-bot-common'
-
+include 'zax-infrastructure'
