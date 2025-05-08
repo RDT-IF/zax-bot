@@ -1,0 +1,29 @@
+//file:noinspection GroovyAssignabilityCheck
+plugins {
+    id 'java'
+}
+
+group = 'org.rdtif.zaxbot'
+version = ''
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': 'org.rdtif.zaxbot.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+
+}
