@@ -3,6 +3,6 @@ WORKDIR /zax-bot
 CMD ["./gradlew", "clean", "zax-bot-main:jar"]
 
 FROM openjdk:17-jdk-alpine AS RUN_PHASE
-COPY zax-bot-main/build/libs/zax-bot-main.jar zax-bot.jar
+COPY COPY --from=BUILD_PHASE zax-bot-main/build/libs/zax-bot-main.jar /
 
-ENTRYPOINT ["java", "-jar", "/zax-bot.jar"]
+ENTRYPOINT ["java", "-jar", "/zax-bot-main.jar"]
