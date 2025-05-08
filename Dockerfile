@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-alpine AS BUILD_PHASE
-WORKDIR /zax-bot/zax-bot-main
+WORKDIR /zax-bot
 CMD ["./gradlew", "clean", "zax-bot-main:jar"]
 
 FROM openjdk:17-jdk-alpine AS RUN_PHASE
