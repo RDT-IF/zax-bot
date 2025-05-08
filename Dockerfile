@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine AS BUILD_PHASE
 WORKDIR /.app_platform_workspace/
-RUN ["ls", "-al"]
+RUN ["chmod", "u+x", "gradlew"]
 RUN ["./gradlew", "clean", "zax-bot-main:jar"]
 
 FROM openjdk:17-jdk-alpine AS RUN_PHASE
