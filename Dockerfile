@@ -5,4 +5,4 @@ RUN ["./gradlew", "clean", "zax-bot-main:jar"]
 
 FROM openjdk:17-jdk-alpine AS run
 COPY --from=build /.app_platform_workspace/zax-bot-main/build/libs/zax-bot-main.jar /.app_platform_workspace/
-ENTRYPOINT ["java", "-jar", "/zax-bot-main.jar"]
+ENTRYPOINT ["java", "-jar", "/.app_platform_workspace/zax-bot-main.jar"]
