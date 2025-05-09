@@ -1,6 +1,11 @@
 //file:noinspection GroovyAssignabilityCheck
 plugins {
     id 'java'
+    id 'application'
+}
+
+application {
+    mainClass = 'org.rdtif.zaxbot.Main'
 }
 
 group = 'org.rdtif.zaxbot'
