@@ -1,9 +1,19 @@
-.gradle
-build
+# IntelliJ
 .idea
+*.iml
+
+# Gradle
+.gradle
+
+# Build output directories
+build
+out
+
+# Logs
+logs
+
+# ZaxBot Stuff
 configuration.properties
 configuration-backup.properties
 games/*.z*
-out/
 stories/
-logs
