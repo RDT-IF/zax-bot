@@ -1,4 +1,2 @@
 rootProject.name = 'zax-bot'
-include 'zax-bot-common'
-include 'zax-bot-infrastructure'
 include 'zax-bot-main'
