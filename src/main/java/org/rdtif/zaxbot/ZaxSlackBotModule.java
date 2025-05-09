@@ -17,6 +17,6 @@ public class ZaxSlackBotModule extends AbstractModule {
     @Provides
     @Singleton
     public ZaxSlackBotConfiguration providesConfiguration(ConfigurationLoader configurationLoader) {
-        return configurationLoader.getConfigurationFrom("../..");
+        return configurationLoader.getConfigurationFrom("..");
     }
 }
