@@ -9,22 +9,11 @@
 build
 out
 
-# CDK asset staging directory
-.cdk.staging
-cdk.out
+# Logs
+logs
 
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-## Added by CDK init
-.classpath.txt
-target
-.classpath
-.project
-.settings
-.vscode
-
-
+# ZaxBot Stuff
+configuration.properties
+configuration-backup.properties
+games/*.z*
+stories/
