@@ -1,6 +1,6 @@
 package org.rdtif.zaxbot.slack;
 
-import com.slack.api.bolt.jetty.SlackAppServer;
+import com.slack.api.bolt.jakarta_jetty.SlackAppServer;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;

@@ -46,8 +46,8 @@ def slf4jVersion = '1.7.36'
 dependencies {
     // Bolt API from Slack
     implementation group: 'com.slack.api', name: 'bolt', version: boltVersion
-    implementation group: 'com.slack.api', name: 'bolt-servlet', version: boltVersion
-    implementation group: 'com.slack.api', name: 'bolt-jetty', version: boltVersion
+    implementation group: 'com.slack.api', name: 'bolt-jakarta-servlet', version: boltVersion
+    implementation group: 'com.slack.api', name: 'bolt-jakarta-jetty', version: boltVersion
 
     implementation group: 'com.github.RDT-IF', name: 'zax', version: 'master-SNAPSHOT'
 
