@@ -78,6 +78,7 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void eraseWindow(int window) {
         screen.eraseWindow(window);
+        screen.update();
     }
 
     @Override

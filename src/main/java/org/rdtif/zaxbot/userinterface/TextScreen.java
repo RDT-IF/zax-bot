@@ -199,6 +199,7 @@ abstract class TextScreen {
     }
 
     void eraseWindow(int window) {
+        System.out.println("eraseWindow");
         for (int i = 0; i < screenLines.size(); i++) {
             screenLines.set(i, new TextScreenLine(""));
         }
