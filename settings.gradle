@@ -1,3 +1,2 @@
 rootProject.name = 'zax-bot'
-include 'aws-lambda-bot'
 include 'zax-bot-main'
