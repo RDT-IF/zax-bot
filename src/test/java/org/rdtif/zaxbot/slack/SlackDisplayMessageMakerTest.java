@@ -6,8 +6,8 @@ import com.slack.api.model.block.SectionBlock;
 import com.slack.api.model.block.composition.DispatchActionConfig;
 import com.slack.api.model.block.element.PlainTextInputElement;
 import org.junit.jupiter.api.Test;
-import org.rdtif.zaxslackbot.userinterface.InputMode;
-import org.rdtif.zaxslackbot.userinterface.InputState;
+import org.rdtif.zaxbot.userinterface.InputMode;
+import org.rdtif.zaxbot.userinterface.InputState;
 
 import java.util.List;
 

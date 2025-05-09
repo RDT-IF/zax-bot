@@ -6,7 +6,7 @@ import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.response.chat.ChatUpdateResponse;
 import com.slack.api.model.block.LayoutBlock;
 import org.junit.jupiter.api.Test;
-import org.rdtif.zaxslackbot.userinterface.InputState;
+import org.rdtif.zaxbot.userinterface.InputState;
 
 import java.util.ArrayList;
 import java.util.List;
