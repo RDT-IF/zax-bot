@@ -10,7 +10,7 @@ import com.slack.api.model.event.AppMentionEvent;
 import org.rdtif.zaxbot.ZaxSlackBotConfiguration;
 import org.rdtif.zaxbot.interpreter.Interpreter;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 public class SlackApplicationModule extends AbstractModule {
     @Provides

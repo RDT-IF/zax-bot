@@ -7,8 +7,8 @@ import com.slack.api.methods.request.chat.ChatUpdateRequest;
 import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.response.chat.ChatUpdateResponse;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 import java.io.IOException;
 
 public class SlackClient {

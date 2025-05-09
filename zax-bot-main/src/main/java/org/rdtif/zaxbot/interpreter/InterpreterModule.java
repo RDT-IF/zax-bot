@@ -1,14 +1,13 @@
 package org.rdtif.zaxbot.interpreter;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.eventbus.EventBus;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import jakarta.inject.Singleton;
 import org.rdtif.zaxbot.GameFileRepository;
 import org.rdtif.zaxbot.ZaxSlackBotConfiguration;
 import org.rdtif.zaxbot.slack.SlackClient;
 
-import javax.inject.Singleton;
 import java.util.Map;
 
 public class InterpreterModule extends AbstractModule {

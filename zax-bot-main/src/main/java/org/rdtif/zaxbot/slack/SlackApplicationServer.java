@@ -2,7 +2,7 @@ package org.rdtif.zaxbot.slack;
 
 import com.slack.api.bolt.jetty.SlackAppServer;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class SlackApplicationServer {
     private final SlackAppServer slackAppServer;

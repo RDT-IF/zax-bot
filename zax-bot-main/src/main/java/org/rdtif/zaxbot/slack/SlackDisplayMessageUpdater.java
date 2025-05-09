@@ -6,7 +6,7 @@ import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.response.chat.ChatUpdateResponse;
 import com.slack.api.model.block.LayoutBlock;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.List;
 
 public class SlackDisplayMessageUpdater {

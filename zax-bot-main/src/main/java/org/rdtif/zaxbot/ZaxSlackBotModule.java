@@ -5,7 +5,7 @@ import com.google.inject.Provides;
 import org.rdtif.zaxbot.interpreter.InterpreterModule;
 import org.rdtif.zaxbot.slack.SlackApplicationModule;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 public class ZaxSlackBotModule extends AbstractModule {
     @Override

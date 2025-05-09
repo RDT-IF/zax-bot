@@ -7,7 +7,7 @@ import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.response.chat.ChatUpdateResponse;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.sameInstance;

@@ -3,7 +3,7 @@ package org.rdtif.zaxbot.interpreter;
 import com.slack.api.methods.request.chat.ChatPostMessageRequest;
 import org.rdtif.zaxbot.slack.SlackClient;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -3,7 +3,7 @@ package org.rdtif.zaxbot;
 import com.google.inject.Guice;
 import org.rdtif.zaxbot.slack.SlackApplicationServer;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 class ZaxSlackBot {
     public static void main(String... arguments) {
