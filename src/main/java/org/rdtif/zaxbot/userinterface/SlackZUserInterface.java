@@ -1,12 +1,9 @@
 package org.rdtif.zaxbot.userinterface;
 
 import com.zaxsoft.zax.zmachine.ZUserInterface;
-import org.rdtif.zaxbot.PlayerInputEvent;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Vector;
 
 public class SlackZUserInterface implements ZUserInterface {
@@ -55,26 +52,31 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public boolean hasUpperWindow() {
+        System.out.println("hasUpperWindow()");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public Dimension getWindowSize(int window) {
+        System.out.println("getWindowSize( window: " + window + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void splitScreen(int lines) {
+        System.out.println("splitScreen( lines: " + lines + ")");
         screen.splitScreen(lines);
     }
 
     @Override
     public void setCurrentWindow(int window) {
+        System.out.println("setCurrentWindow( window: " + window + ")");
         screen.setCurrentWindow(window);
     }
 
     @Override
     public void eraseWindow(int window) {
+        System.out.println("eraseWindow( window: " + window + ")");
         screen.eraseWindow(window);
         screen.update();
     }
@@ -91,7 +93,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public boolean hasBoldface() {
-        return true;
+        return false;
     }
 
     @Override
@@ -101,7 +103,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public boolean hasItalic() {
-        return true;
+        return false;
     }
 
     @Override
@@ -126,16 +128,19 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public boolean hasStatusLine() {
+        System.out.println("hasStatusLine()");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public Point getCursorPosition() {
+        System.out.println("getCursorPosition()");
         return screen.getCursorPosition().toPoint();
     }
 
     @Override
     public void showStatusBar(String s, int a, int b, boolean flag) {
+        System.out.println("showStatusBar(s:" + s + ", a:" + a + ", b:" + b + ", flag:" + flag + ")");
         throw new UnsupportedOperationException();
     }
 
@@ -147,16 +152,19 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void setColor(int foreground, int background) {
+        System.out.println("setColor: (" + foreground + ", " + background + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void setTextStyle(int style) {
+        System.out.println("setTextStyle( style: " + style + ")");
         screen.setTextStyle(style);
     }
 
     @Override
     public void setFont(int font) {
+        System.out.println("setFont( font: " + font + ")");
         throw new UnsupportedOperationException();
     }
 
@@ -188,8 +196,8 @@ public class SlackZUserInterface implements ZUserInterface {
         while (inputState.currentInput.isEmpty()) {
             try {
                 Thread.sleep(0);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException exception) {
+                throw new RuntimeException(exception);
             }
         }
         buffer.append(inputState.currentInput).append('\0');
@@ -199,6 +207,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void showString(String string) {
+        System.out.println("showString( string: " + string + ")");
         screen.print(string);
     }
 
