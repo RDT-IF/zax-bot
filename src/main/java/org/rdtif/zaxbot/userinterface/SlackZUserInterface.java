@@ -182,8 +182,14 @@ public class SlackZUserInterface implements ZUserInterface {
         System.out.println("readChar(time: " + time + ")");
         inputState.mode = InputMode.Character;
         screen.update();
-        //noinspection StatementWithEmptyBody
-        while (inputState.currentInput.isEmpty()) {}
+        while (inputState.currentInput.isEmpty()) {
+            try {
+                //noinspection BusyWait
+                Thread.sleep(0);
+            } catch (InterruptedException exception) {
+                throw new RuntimeException(exception);
+            }
+        }
         System.out.println("Current Input: " + inputState.currentInput);
         char c = inputState.currentInput.charAt(0);
         inputState.currentInput = "";
@@ -195,8 +201,14 @@ public class SlackZUserInterface implements ZUserInterface {
         System.out.println("readLine(time: " + time + ")");
         inputState.mode = InputMode.Line;
         screen.update();
-        //noinspection StatementWithEmptyBody
-        while (inputState.currentInput.isEmpty()) {}
+        while (inputState.currentInput.isEmpty()) {
+            try {
+                //noinspection BusyWait
+                Thread.sleep(0);
+            } catch (InterruptedException exception) {
+                throw new RuntimeException(exception);
+            }
+        }
         buffer.append(inputState.currentInput).append('\0');
         inputState.currentInput = "";
         return 0;
