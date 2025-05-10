@@ -184,6 +184,7 @@ public class SlackZUserInterface implements ZUserInterface {
         screen.update();
         while (inputState.currentInput.isEmpty()) {
             try {
+                // I know, this seems pointless, but it makes it work. Its likely that the compiler is mistakenly optimizing this away
                 //noinspection BusyWait
                 Thread.sleep(0);
             } catch (InterruptedException exception) {
@@ -203,6 +204,7 @@ public class SlackZUserInterface implements ZUserInterface {
         screen.update();
         while (inputState.currentInput.isEmpty()) {
             try {
+                // I know, this seems pointless, but it makes it work. Its likely that the compiler is mistakenly optimizing this away
                 //noinspection BusyWait
                 Thread.sleep(0);
             } catch (InterruptedException exception) {
