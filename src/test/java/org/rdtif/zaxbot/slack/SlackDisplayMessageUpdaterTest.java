@@ -31,6 +31,7 @@ class SlackDisplayMessageUpdaterTest {
         ChatPostMessageRequest request = ChatPostMessageRequest.builder()
                 .channel("channelID")
                 .blocks(expectedContent)
+                .text("foo")
                 .build();
 
         verify(mockSlackClient).chatPostMessage(request);
@@ -51,6 +52,7 @@ class SlackDisplayMessageUpdaterTest {
         ChatUpdateRequest request = ChatUpdateRequest.builder()
                 .channel("channelID")
                 .ts("messageTimestamp1")
+                .text("foo")
                 .blocks(expectedContent)
                 .build();
 
@@ -72,6 +74,7 @@ class SlackDisplayMessageUpdaterTest {
         ChatUpdateRequest request2 = ChatUpdateRequest.builder()
                 .channel("channelID")
                 .ts("messageTimestamp2")
+                .text("foo")
                 .blocks(expectedContent)
                 .build();
 
