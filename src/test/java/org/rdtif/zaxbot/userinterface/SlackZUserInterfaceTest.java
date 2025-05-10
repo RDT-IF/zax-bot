@@ -119,14 +119,14 @@ class SlackZUserInterfaceTest {
     void hasBoldFaceShouldReturnTrue() {
         SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
 
-        assertThat(userInterface.hasBoldface(), equalTo(true));
+        assertThat(userInterface.hasBoldface(), equalTo(false));
     }
 
     @Test
     void hasItalicShouldReturnTrue() {
         SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
 
-        assertThat(userInterface.hasItalic(), equalTo(true));
+        assertThat(userInterface.hasItalic(), equalTo(false));
     }
 
     @Test

@@ -90,10 +90,14 @@ abstract class TextScreen {
     private void printSubstring(String token) {
         while (!token.isEmpty()) {
             int charactersRemainingInCurrentRow = size.getColumns() - cursorPosition.getColumn();
-            int nextLength = charactersRemainingInCurrentRow < token.length() ? charactersRemainingInCurrentRow : token.length();
+            int nextLength = Math.min(charactersRemainingInCurrentRow, token.length());
             if (token.length() > charactersRemainingInCurrentRow) {
-                while (!isValidWrapCharacter(token.charAt(nextLength - 1))) {
-                    nextLength--;
+                try {
+                    while (!isValidWrapCharacter(token.charAt(nextLength - 1))) {
+                        nextLength--;
+                    }
+                } catch (StringIndexOutOfBoundsException exception) {
+                    throw new StringIndexOutOfBoundsException("Attempt to print a string beyond the edge of screen");
                 }
             }
             TextScreenLine line = screenLines.get(cursorPosition.getRow());
