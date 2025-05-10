@@ -17,8 +17,6 @@ public class SlackZUserInterface implements ZUserInterface {
     private static final int Z_MACHINE_WHITE = 9;
     private final SlackTextScreen screen;
     private final InputState inputState;
-    private final Object playerInputLock = new Object();
-    private final Queue<String> playerInput = new LinkedList<>();
 
     public SlackZUserInterface(SlackTextScreen screen, InputState inputState) {
         this.screen = screen;
@@ -143,6 +141,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void setCursorPosition(int x, int y) {
+        System.out.println("setCursorPosition: (" + x + ", " + y + ")");
         screen.setCursorPosition(x, y);
     }
 
@@ -205,12 +204,13 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void scrollWindow(int lines) {
+        System.out.println("ScrollWindow: " + lines);
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void eraseLine(int size) {
-        System.out.println("Erase line");
+        System.out.println("Erase line:" + size);
         throw new UnsupportedOperationException();
     }
 
@@ -227,11 +227,5 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void restart() {
         throw new UnsupportedOperationException();
-    }
-
-    public void respondTo(PlayerInputEvent event) {
-        synchronized (playerInputLock) {
-            playerInput.add(event.getPlayerInput());
-        }
     }
 }
