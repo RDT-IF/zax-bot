@@ -83,46 +83,55 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public int getDefaultForeground() {
+        System.out.println("getDefaultForeground()");
         return Z_MACHINE_BLACK;
     }
 
     @Override
     public int getDefaultBackground() {
+        System.out.println("getDefaultBackground()");
         return Z_MACHINE_WHITE;
     }
 
     @Override
     public boolean hasBoldface() {
+        System.out.println("hasBoldface()");
         return false;
     }
 
     @Override
     public boolean hasFixedWidth() {
+        System.out.println("hasFixedWidth()");
         return true;
     }
 
     @Override
     public boolean hasItalic() {
+        System.out.println("hasItalic()");
         return false;
     }
 
     @Override
     public boolean hasTimedInput() {
+        System.out.println("hasTimedInput()");
         return false;
     }
 
     @Override
     public boolean defaultFontProportional() {
+        System.out.println("defaultFontProportional()");
         return false;
     }
 
     @Override
     public boolean hasColors() {
+        System.out.println("hasColors()");
         return false;
     }
 
     @Override
     public void setTerminatingCharacters(Vector characters) {
+        System.out.println("setTerminatingCharacters(characters: " + characters + ")");
         throw new UnsupportedOperationException();
     }
 
@@ -146,19 +155,19 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void setCursorPosition(int x, int y) {
-        System.out.println("setCursorPosition: (" + x + ", " + y + ")");
+        System.out.println("setCursorPosition(" + x + ", " + y + ")");
         screen.setCursorPosition(x, y);
     }
 
     @Override
     public void setColor(int foreground, int background) {
-        System.out.println("setColor: (" + foreground + ", " + background + ")");
+        System.out.println("setColor( foreground: " + foreground + ", background: " + background + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void setTextStyle(int style) {
-        System.out.println("setTextStyle( style: " + style + ")");
+        System.out.println("setTextStyle(style: " + style + ")");
         screen.setTextStyle(style);
     }
 
@@ -170,18 +179,12 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public int readChar(int time) {
-        System.out.println("ENTERING READ_CHAR");
+        System.out.println("readChar(time: " + time + ")");
         inputState.mode = InputMode.Character;
         screen.update();
         //noinspection StatementWithEmptyBody
-        while (inputState.currentInput.isEmpty()) {
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        System.out.println(inputState.currentInput);
+        while (inputState.currentInput.isEmpty()) {}
+        System.out.println("Current Input: " + inputState.currentInput);
         char c = inputState.currentInput.charAt(0);
         inputState.currentInput = "";
         return c;
@@ -189,17 +192,11 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public int readLine(StringBuffer buffer, int time) {
-        System.out.println("ENTERING READ_LINE");
+        System.out.println("readLine(time: " + time + ")");
         inputState.mode = InputMode.Line;
         screen.update();
         //noinspection StatementWithEmptyBody
-        while (inputState.currentInput.isEmpty()) {
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException exception) {
-                throw new RuntimeException(exception);
-            }
-        }
+        while (inputState.currentInput.isEmpty()) {}
         buffer.append(inputState.currentInput).append('\0');
         inputState.currentInput = "";
         return 0;
@@ -213,28 +210,31 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void scrollWindow(int lines) {
-        System.out.println("ScrollWindow: " + lines);
+        System.out.println("ScrollWindow(lines: " + lines + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void eraseLine(int size) {
-        System.out.println("Erase line:" + size);
+        System.out.println("Erase line(size: " + size + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public String getFilename(String title, String suggested, boolean saveFlag) {
+        System.out.println("getFilename(title: " + title + ", suggested: " + suggested + ", saveFlag: " + saveFlag + ")");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void quit() {
+        System.out.println("quit()");
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void restart() {
+        System.out.println("restart()");
         throw new UnsupportedOperationException();
     }
 }
