@@ -210,6 +210,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void eraseLine(int size) {
+        System.out.println("Erase line");
         throw new UnsupportedOperationException();
     }
 
