@@ -4,7 +4,6 @@ import com.slack.api.model.block.LayoutBlock;
 import org.junit.jupiter.api.Test;
 import org.rdtif.zaxbot.slack.SlackDisplayMessageMaker;
 import org.rdtif.zaxbot.slack.SlackDisplayMessageUpdater;
-import org.rdtif.zaxbot.slack.SlackDisplayMessageMaker;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ class SlackTextScreenTest {
 
         screen.initialize(5);
 
-        assertThat(screen.getVersion(), equalTo(5));
+        assertThat(screen.getZMachineVersion(), equalTo(5));
     }
 
     @Test

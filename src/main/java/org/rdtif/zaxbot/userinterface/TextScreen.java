@@ -12,7 +12,7 @@ abstract class TextScreen {
     private final Extent size;
     private Position cursorPosition = new Position(0, 0);
     private int upperWindowBottomRowPointer = -1;
-    private int version;
+    private int ZMachineVersion = 0;
     private int currentWindow;
 
     TextScreen(Extent size) {
@@ -23,8 +23,8 @@ abstract class TextScreen {
         }
     }
 
-    void setVersion(int version) {
-        this.version = version;
+    void setZMachineVersion(int ZMachineVersion) {
+        this.ZMachineVersion = ZMachineVersion;
     }
 
     abstract void update();
@@ -175,7 +175,7 @@ abstract class TextScreen {
     }
 
     boolean hasUpperWindow() {
-        return version >= 3;
+        return ZMachineVersion >= 3;
     }
 
     Extent getWindowSize(int window) {
@@ -209,8 +209,8 @@ abstract class TextScreen {
         }
     }
 
-    int getVersion() {
-        return version;
+    int getZMachineVersion() {
+        return ZMachineVersion;
     }
 
     void setTextStyle(int style) {
@@ -227,5 +227,9 @@ abstract class TextScreen {
 
     void setCursorPosition(int x, int y) {
         cursorPosition = new Position(y, x);
+    }
+
+    void setStatusBar(String statusBar) {
+        this.screenLines.set(0, new TextScreenLine(statusBar));
     }
 }

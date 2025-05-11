@@ -14,6 +14,7 @@ public class SlackZUserInterface implements ZUserInterface {
     private static final int Z_MACHINE_WHITE = 9;
     private final SlackTextScreen screen;
     private final InputState inputState;
+    private int ZMachineVersion = 0;
 
     public SlackZUserInterface(SlackTextScreen screen, InputState inputState) {
         this.screen = screen;
@@ -21,8 +22,9 @@ public class SlackZUserInterface implements ZUserInterface {
     }
 
     @Override
-    public void initialize(int version) {
-        screen.initialize(version);
+    public void initialize(int ZMachineVersion) {
+        this.ZMachineVersion = ZMachineVersion;
+        screen.initialize(ZMachineVersion);
         screen.update();
     }
 
@@ -136,21 +138,39 @@ public class SlackZUserInterface implements ZUserInterface {
     }
 
     @Override
-    public boolean hasStatusLine() {
-        System.out.println("hasStatusLine()");
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public Point getCursorPosition() {
         System.out.println("getCursorPosition()");
         return screen.getCursorPosition().toPoint();
     }
 
     @Override
-    public void showStatusBar(String s, int a, int b, boolean flag) {
-        System.out.println("showStatusBar(s:" + s + ", a:" + a + ", b:" + b + ", flag:" + flag + ")");
-        throw new UnsupportedOperationException();
+    public boolean hasStatusLine() {
+        System.out.println("hasStatusLine()");
+        return (ZMachineVersion >= 1) && (ZMachineVersion <= 3);
+    }
+
+    @Override
+    public void showStatusBar(String statusMessage, int a, int b, boolean flag) {
+        System.out.println("showStatusBar(s:" + statusMessage + ", a:" + a + ", b:" + b + ", flag:" + flag + ")");
+        String leftPart, middlePart, rightPart;
+
+        leftPart = " " + statusMessage + " ";
+        if (flag) {
+            middlePart = " Time: " + a + ":";
+            if (b < 10) middlePart += "0";
+            middlePart = middlePart + b;
+            rightPart = " ";
+        } else {
+            middlePart = " Score: " + a + " ";
+            rightPart = " Turns: " + b + " ";
+        }
+
+        int allPartsLength = leftPart.length() + middlePart.length() + rightPart.length();
+        int paddingRequired = screen.getSize().getRows() - allPartsLength;
+        String padding = " ".repeat(paddingRequired);
+
+        String statusBar = leftPart + padding + middlePart + rightPart;
+        screen.setStatusBar(statusBar);
     }
 
     @Override

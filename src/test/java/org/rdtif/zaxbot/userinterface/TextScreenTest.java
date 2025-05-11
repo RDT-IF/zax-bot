@@ -40,7 +40,7 @@ class TextScreenTest {
     @Test
     void hasUpperWindowReturnsTrueForVersionGreaterThan3() {
         TestTextScreen textScreen = new TestTextScreen(new Extent(10, 80));
-        textScreen.setVersion(new Random().nextInt(5) + 3);
+        textScreen.setZMachineVersion(new Random().nextInt(5) + 3);
 
         assertThat(textScreen.hasUpperWindow(), equalTo(true));
     }
@@ -48,7 +48,7 @@ class TextScreenTest {
     @Test
     void hasUpperWindowReturnsFalseForLessThanThree() {
         TestTextScreen textScreen = new TestTextScreen(new Extent(10, 80));
-        textScreen.setVersion(new Random().nextInt(3));
+        textScreen.setZMachineVersion(new Random().nextInt(3));
 
         assertThat(textScreen.hasUpperWindow(), equalTo(false));
     }

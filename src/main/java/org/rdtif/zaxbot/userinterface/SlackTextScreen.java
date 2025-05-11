@@ -14,7 +14,7 @@ public class SlackTextScreen extends TextScreen {
     }
 
     void initialize(int version) {
-        super.setVersion(version);
+        super.setZMachineVersion(version);
         updater.initialize(maker.makeMessageOf("Display loading..."));
     }
 
