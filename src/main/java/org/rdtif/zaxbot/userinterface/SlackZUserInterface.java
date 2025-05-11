@@ -23,6 +23,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void initialize(int ZMachineVersion) {
+        System.out.println(ZMachineVersion);
         this.ZMachineVersion = ZMachineVersion;
         screen.initialize(ZMachineVersion);
         screen.update();
