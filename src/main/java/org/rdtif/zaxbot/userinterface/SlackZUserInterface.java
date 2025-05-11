@@ -166,7 +166,7 @@ public class SlackZUserInterface implements ZUserInterface {
         }
 
         int allPartsLength = leftPart.length() + middlePart.length() + rightPart.length();
-        int paddingRequired = screen.getSize().getRows() - allPartsLength;
+        int paddingRequired = screen.getSize().getColumns() - allPartsLength;
         String padding = " ".repeat(Math.min(0, paddingRequired));
 
         String statusBar = leftPart + padding + middlePart + rightPart;
