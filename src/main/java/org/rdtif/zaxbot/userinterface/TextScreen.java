@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 abstract class TextScreen {
     private final List<TextScreenLine> screenLines;
     private final Extent size;
-    private Position cursorPosition = new Position(0, 0);
+    private Position cursorPosition = new Position(1, 0);
     private int upperWindowBottomRowPointer = -1;
     private int ZMachineVersion = 0;
     private int currentWindow;
