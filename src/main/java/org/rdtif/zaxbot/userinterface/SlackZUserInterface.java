@@ -55,7 +55,7 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public boolean hasUpperWindow() {
         System.out.println("hasUpperWindow()");
-        throw new UnsupportedOperationException();
+        return false;
     }
 
     @Override
@@ -134,7 +134,6 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void setTerminatingCharacters(Vector characters) {
         System.out.println("setTerminatingCharacters(characters: " + characters + ")");
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -182,7 +181,6 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void setColor(int foreground, int background) {
         System.out.println("setColor( foreground: " + foreground + ", background: " + background + ")");
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -194,7 +192,6 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void setFont(int font) {
         System.out.println("setFont( font: " + font + ")");
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -245,30 +242,26 @@ public class SlackZUserInterface implements ZUserInterface {
     @Override
     public void scrollWindow(int lines) {
         System.out.println("ScrollWindow(lines: " + lines + ")");
-        throw new UnsupportedOperationException();
     }
 
     @Override
     public void eraseLine(int size) {
         System.out.println("Erase line(size: " + size + ")");
-        throw new UnsupportedOperationException();
     }
 
     @Override
     public String getFilename(String title, String suggested, boolean saveFlag) {
         System.out.println("getFilename(title: " + title + ", suggested: " + suggested + ", saveFlag: " + saveFlag + ")");
-        throw new UnsupportedOperationException();
+        return "";
     }
 
     @Override
     public void quit() {
         System.out.println("quit()");
-        throw new UnsupportedOperationException();
     }
 
     @Override
     public void restart() {
         System.out.println("restart()");
-        throw new UnsupportedOperationException();
     }
 }
