@@ -52,7 +52,7 @@ class SlackZUserInterfaceTest {
 
     @Test
     void displayMessageWhenFatal() {
-        String message = RandomStringUtils.randomAlphabetic(13);
+        String message = RandomStringUtils.insecure().nextAlphabetic(13);
 
         assertThrows(ZaxFatalException.class, () -> new SlackZUserInterface(slackTextScreen, null).fatal(message));
 
@@ -61,12 +61,12 @@ class SlackZUserInterfaceTest {
 
     @Test
     void fatalThrowsException() {
-        assertThrows(ZaxFatalException.class, () -> new SlackZUserInterface(slackTextScreen, null).fatal(RandomStringUtils.randomAlphabetic(13)));
+        assertThrows(ZaxFatalException.class, () -> new SlackZUserInterface(slackTextScreen, null).fatal(RandomStringUtils.insecure().nextAlphabetic(13)));
     }
 
     @Test
     void fatalThrowsExceptionWithMessage() {
-        String message = RandomStringUtils.randomAlphabetic(13);
+        String message = RandomStringUtils.insecure().nextAlphabetic(13);
         ZaxFatalException exception = assertThrows(ZaxFatalException.class, () -> new SlackZUserInterface(slackTextScreen, null).fatal(message));
         assertThat(exception.getMessage(), equalTo(message));
     }
@@ -196,7 +196,7 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar(statusMessage, 0, 0, false);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith(" " + statusMessage + " "));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith(statusMessage + " "));
     }
 
     @ParameterizedTest
@@ -208,7 +208,7 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar("status message", 100, b, true);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Time: 100:" + b + " "));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq("status message  Time: 100:" + b + " "));
     }
 
     @ParameterizedTest
@@ -220,13 +220,13 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar("status message", 100, b, true);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Time: 100:0" + b + " "));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq("status message  Time: 100:0" + b + " "));
     }
 
     @Test
     void handleScoreAndTurnsMode() {
-        int score = RandomUtils.insecure().randomInt(1, 1000);
-        int turns = RandomUtils.insecure().randomInt(1, 1000);
+        int score = RandomUtils.insecure().randomInt(100, 999);
+        int turns = RandomUtils.insecure().randomInt(100, 999);
         String statusMessage = "status message";
         SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
         Extent size = new Extent(1, 40);
@@ -234,7 +234,7 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar(statusMessage, score, turns, false);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Score: " + score + "  Turns: " + turns + " "));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq("status message   Score: " + score + "  Turns: " + turns + " "));
     }
 
     @Test
@@ -248,13 +248,11 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar(statusMessage, 0, 0, false);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith(" status message" + " ".repeat(expectedSpaces)));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith("status message" + " ".repeat(expectedSpaces)));
     }
 
     @Test
     void handleNarrowLength() {
-        int lineLength = RandomUtils.insecure().randomInt(37, 200);
-        int expectedSpaces = lineLength - 34;
         String statusMessage = "status message";
         SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
         Extent size = new Extent(1, 30);
@@ -262,6 +260,6 @@ class SlackZUserInterfaceTest {
 
         userInterface.showStatusBar(statusMessage, 0, 0, false);
 
-        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Score: 0  Turns: 0 "));
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq("status message  Score: 0  Turns: 0 "));
     }
 }

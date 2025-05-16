@@ -152,7 +152,7 @@ public class SlackZUserInterface implements ZUserInterface {
     public void showStatusBar(String statusMessage, int a, int b, boolean flag) {
         String leftPart, middlePart, rightPart;
 
-        leftPart = " " + statusMessage + " ";
+        leftPart = statusMessage + " ";
         if (flag) {
             middlePart = " Time: " + a + ":";
             if (b < 10) middlePart += "0";
