@@ -1,10 +1,14 @@
 package org.rdtif.zaxbot.userinterface;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentMatchers;
 import org.rdtif.zaxbot.Zoey;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -156,5 +160,108 @@ class SlackZUserInterfaceTest {
         SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
 
         assertThat(userInterface.hasTimedInput(), equalTo(false));
+    }
+
+    @Test
+    void hasUpperWindow() {
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+
+        assertThat(userInterface.hasUpperWindow(), equalTo(slackTextScreen.hasUpperWindow()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void hasStatusLineTrue(int ZMachineVersion) {
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        userInterface.initialize(ZMachineVersion);
+
+        assertThat(userInterface.hasStatusLine(), equalTo(true));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 4, 5})
+    void hasStatusLineFalse(int ZMachineVersion) {
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        userInterface.initialize(ZMachineVersion);
+
+        assertThat(userInterface.hasStatusLine(), equalTo(false));
+    }
+
+    @Test
+    void statusBarIncludesStatusMessage() {
+        String statusMessage = "status message";
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, 29);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar(statusMessage, 0, 0, false);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith(" " + statusMessage + " "));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10, 11, 12, 13, 59})
+    void statusBarMessageWithTimeThatHasSeconds10OrMore(int b) {
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, 29);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar("status message", 100, b, true);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Time: 100:" + b + " "));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+    void statusBarMessageWithTimeThatHasSecondsLessThan10(int b) {
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, 29);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar("status message", 100, b, true);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Time: 100:0" + b + " "));
+    }
+
+    @Test
+    void handleScoreAndTurnsMode() {
+        int score = RandomUtils.insecure().randomInt(1, 1000);
+        int turns = RandomUtils.insecure().randomInt(1, 1000);
+        String statusMessage = "status message";
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, 40);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar(statusMessage, score, turns, false);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Score: " + score + "  Turns: " + turns + " "));
+    }
+
+    @Test
+    void rightAlignEverythingExceptStatusMessage() {
+        int lineLength = RandomUtils.insecure().randomInt(37, 200);
+        int expectedSpaces = lineLength - 34;
+        String statusMessage = "status message";
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, lineLength);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar(statusMessage, 0, 0, false);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.startsWith(" status message" + " ".repeat(expectedSpaces)));
+    }
+
+    @Test
+    void handleNarrowLength() {
+        int lineLength = RandomUtils.insecure().randomInt(37, 200);
+        int expectedSpaces = lineLength - 34;
+        String statusMessage = "status message";
+        SlackZUserInterface userInterface = new SlackZUserInterface(slackTextScreen, null);
+        Extent size = new Extent(1, 30);
+        when(slackTextScreen.getSize()).thenReturn(size);
+
+        userInterface.showStatusBar(statusMessage, 0, 0, false);
+
+        verify(slackTextScreen).setStatusBar(ArgumentMatchers.eq(" status message  Score: 0  Turns: 0 "));
     }
 }

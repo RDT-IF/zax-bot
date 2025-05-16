@@ -1,7 +1,11 @@
 package org.rdtif.zaxbot.userinterface;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.rdtif.zaxbot.Zoey;
 
 import java.util.Random;
@@ -254,6 +258,29 @@ class TextScreenTest {
         String text = textScreen.getJoinedText();
 
         assertThat(text, equalTo(line + "\n"));
+    }
+
+    @Test
+    void getJoinedTextIncludesStatusBar() {
+        String statusBar = "status bar text";
+        TestTextScreen textScreen = new TestTextScreen(new Extent(0, 25));
+        textScreen.setStatusBar(statusBar);
+
+        String text = textScreen.getJoinedText();
+
+        assertThat(text, equalTo(statusBar + "\n\n"));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {" ", "\n", "\t", "\r"})
+    void getJoinedTextDoesNotIncludeEmptyStatusBar(String statusBar) {
+        TestTextScreen textScreen = new TestTextScreen(new Extent(0, 25));
+        textScreen.setStatusBar(statusBar);
+
+        String text = textScreen.getJoinedText();
+
+        assertThat(text, equalTo("\n"));
     }
 
     @Test
@@ -593,6 +620,16 @@ class TextScreenTest {
         textScreen.scroll(-3);
 
         assertThat(textScreen.getJoinedText(), equalTo("\n"));
+    }
+
+    @Test
+    void statusBar() {
+        String line = "status bar line";
+        TestTextScreen textScreen = new TestTextScreen(new Extent(1, 25));
+
+        textScreen.setStatusBar(line);
+
+        assertThat(textScreen.getStatusBar(), equalTo(line));
     }
 
     private Position randomRowZeroPosition() {

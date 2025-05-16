@@ -10,10 +10,11 @@ import java.util.stream.Collectors;
 abstract class TextScreen {
     private final List<TextScreenLine> screenLines;
     private final Extent size;
-    private Position cursorPosition = new Position(1, 0);
+    private Position cursorPosition = new Position(0, 0);
     private int upperWindowBottomRowPointer = -1;
     private int ZMachineVersion = 0;
     private int currentWindow;
+    private String statusBar = "";
 
     TextScreen(Extent size) {
         this.size = size;
@@ -53,7 +54,8 @@ abstract class TextScreen {
     }
 
     String getJoinedText() {
-        return screenLines.stream().map(TextScreenLine::getText).collect(Collectors.joining("\n", "", "\n"));
+        String statusBarLine = StringUtils.isBlank(statusBar) ? "" : statusBar + "\n";
+        return statusBarLine + screenLines.stream().map(TextScreenLine::getText).collect(Collectors.joining("\n", "", "\n"));
     }
 
     void print(String string) {
@@ -150,7 +152,7 @@ abstract class TextScreen {
         if (lines >= 0) {
             scrollUp(lines);
         } else {
-            scrollDown(0 - lines);
+            scrollDown(Math.abs(lines));
         }
     }
 
@@ -230,6 +232,10 @@ abstract class TextScreen {
     }
 
     void setStatusBar(String statusBar) {
-        this.screenLines.set(0, new TextScreenLine(statusBar));
+        this.statusBar = statusBar;
+    }
+
+    String getStatusBar() {
+        return statusBar;
     }
 }

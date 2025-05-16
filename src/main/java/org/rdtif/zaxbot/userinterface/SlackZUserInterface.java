@@ -55,8 +55,7 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public boolean hasUpperWindow() {
-        System.out.println("hasUpperWindow()");
-        return false;
+        return screen.hasUpperWindow();
     }
 
     @Override
@@ -151,7 +150,6 @@ public class SlackZUserInterface implements ZUserInterface {
 
     @Override
     public void showStatusBar(String statusMessage, int a, int b, boolean flag) {
-        System.out.println("showStatusBar(s:" + statusMessage + ", a:" + a + ", b:" + b + ", flag:" + flag + ")");
         String leftPart, middlePart, rightPart;
 
         leftPart = " " + statusMessage + " ";
@@ -166,8 +164,9 @@ public class SlackZUserInterface implements ZUserInterface {
         }
 
         int allPartsLength = leftPart.length() + middlePart.length() + rightPart.length();
-        int paddingRequired = screen.getSize().getColumns() - allPartsLength;
-        String padding = " ".repeat(Math.min(0, paddingRequired));
+        int remainingLineLength = screen.getSize().getColumns() - allPartsLength;
+        int paddingRequired = Math.max(remainingLineLength, 0);
+        String padding = " ".repeat(paddingRequired);
 
         String statusBar = leftPart + padding + middlePart + rightPart;
         screen.setStatusBar(statusBar);

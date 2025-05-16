@@ -21,8 +21,7 @@ public class Extent {
 
     @Override
     public final boolean equals(Object other) {
-        if (other instanceof Extent) {
-            Extent otherExtent = (Extent) other;
+        if (other instanceof Extent otherExtent) {
             return rows == otherExtent.rows && columns == otherExtent.columns;
         }
         return false;
